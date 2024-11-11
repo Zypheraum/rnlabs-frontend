@@ -313,7 +313,7 @@ export default function Component() {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-400">
-            <p>&copy; 2023 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
+            <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
           </div>
         </div>
       </footer>
