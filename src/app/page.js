@@ -162,6 +162,9 @@ export default function Component() {
 
   return (
     <>
+    <Head>
+        <title>RN Labs</title>
+      </Head>
     <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=G-FGF1WB7LKB`}
@@ -282,7 +285,7 @@ export default function Component() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Raum Network</h3>
+              <h3 className="text-2xl font-semibold mb-6">RN Labs</h3>
               <p className="text-gray-400 text-lg">Pioneering the future of decentralized finance through innovative blockchain solutions.</p>
             </div>
             <div>
