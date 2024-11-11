@@ -9,6 +9,7 @@ import { OrbitControls, Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 import { Button } from "@/components/ui/button"
 import Script from 'next/script';
+import Head from 'next/head';
 
 const services = [
   {
@@ -162,6 +163,9 @@ export default function Component() {
 
   return (
     <>
+    <Head>
+        <title>RN Labs</title>
+      </Head>
     <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=G-FGF1WB7LKB`}
@@ -282,7 +286,7 @@ export default function Component() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Raum Network</h3>
+              <h3 className="text-2xl font-semibold mb-6">RN Labs</h3>
               <p className="text-gray-400 text-lg">Pioneering the future of decentralized finance through innovative blockchain solutions.</p>
             </div>
             <div>
@@ -313,7 +317,7 @@ export default function Component() {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-400">
-            <p>&copy; 2023 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
+            <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
           </div>
         </div>
       </footer>
