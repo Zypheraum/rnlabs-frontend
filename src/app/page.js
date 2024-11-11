@@ -9,6 +9,7 @@ import { OrbitControls, Points, PointMaterial } from '@react-three/drei'
 import * as THREE from 'three'
 import { Button } from "@/components/ui/button"
 import Script from 'next/script';
+import Head from 'next/head';
 
 const services = [
   {
