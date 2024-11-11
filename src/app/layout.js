@@ -4,9 +4,9 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  metadataBase: new URL('https://web.raum.network/' ?? 'http://localhost:3000'),
+  metadataBase: new URL('https://services.raum.network/' ?? 'http://localhost:3000'),
   openGraph: {
-  title: 'Raum Network | RaumFi DEX | RaumStore | RN Bridge',
+  title: 'RN Labs',
   description: 'Secure storage meets decentralized finance - your assets, your control. Experience the power of true ownership and financial freedom with our innovative solutions.',
   images: [
     {

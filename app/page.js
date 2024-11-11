@@ -10,6 +10,7 @@ import * as THREE from 'three'
 import { Button } from "@/components/ui/button"
 import Script from 'next/script';
 import Head from 'next/head';
+import {NextSeo} from 'next-seo';
 
 const services = [
   {
@@ -164,8 +165,12 @@ export default function Component() {
   return (
     <>
     <Head>
-        <title>RN Labs</title>
-      </Head>
+      <title>RN Labs</title>
+    </Head>
+    <NextSeo
+        title="RN Labs"
+        description="RN Labs Services"
+      />
     <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=G-FGF1WB7LKB`}

@@ -163,9 +163,13 @@ export default function Component() {
 
   return (
     <>
-    <Head>
-        <title>RN Labs</title>
-      </Head>
+   <Head>
+      <title>RN Labs</title>
+    </Head>
+    <NextSeo
+        title="RN Labs"
+        description="RN Labs Services"
+      />
     <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=G-FGF1WB7LKB`}
