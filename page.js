@@ -192,7 +192,7 @@ export default function Component() {
         <Scene mouse={mouse} />
       </div>
 
-      <nav className="fixed w-full z-50 bg-black/50 backdrop-blur-md">
+      <nav className="fixed w-full z-50 bg-white border-b border-blue-100">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <Link href="/" className="text-2xl md:text-3xl font-bold">RN LABS</Link>
           <div className="hidden sm:flex items-center gap-4 md:gap-8">

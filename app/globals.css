@@ -2,86 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* @-webkit-keyframes Gradient {
-  0% {
-  background-position: 0% 50%
-  }
-50% {
-background-position: 100% 50%
-}
-100% {
-background-position: 0% 50%
-}
+:root {
+  color-scheme: light;
 }
 
-@-moz-keyframes Gradient {
-  0% {
-  background-position: 0% 50%
-  }
-50% {
-background-position: 100% 50%
-}
-100% {
-background-position: 0% 50%
-}
-}
-
-@keyframes Gradient {
-  0% {
-  background-position: 0% 50%
-  }
-50% {
-background-position: 100% 50%
-}
-100% {
-background-position: 0% 50%
-}
-}
-
-
-
-
- body {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  -webkit-animation: Gradient 15s ease infinite;
-  -moz-animation: Gradient 15s ease infinite;
-  animation: Gradient 15s ease infinite;
-} */
-
-
-.py-12 {
-  padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
-}
-
-.md\:py-24 {
-  padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
-}
-
-.lg\:py-32 {
-  padding-top: 1.5rem !important;
-  padding-bottom: 1.5rem !important;
-}
 body {
-  background: linear-gradient(-45deg, #1e90ff, #100c09);
-  background-size: 200% 200%;
-  animation: GradientBackground 3s ease infinite;
+  margin: 0;
+  overflow-x: hidden;
+  background: white;
+  color: #000000;
+  font-family: 'Inter', sans-serif;
 }
 
-@keyframes GradientBackground {
-  0% {
-    background-position: 0% 50%;
-  }
+/* Make headings blue */
+h1, h2, h3, h4, h5, h6 {
+  color: #2563eb;
+}
 
-  50% {
-    background-position: 100% 50%;
-  }
+canvas {
+  touch-action: none;
+}
 
-  100% {
-    background-position: 0% 50%;
-  }
-};
+.gradient-text {
+  background: linear-gradient(135deg, #1a365d 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-
+/* Override text colors in paragraphs */
+p {
+  color: #000000;
+}

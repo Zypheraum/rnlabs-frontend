@@ -16,7 +16,7 @@ const services = [
     title: "Decentralized Exchange",
     description: "Trade tokens seamlessly with our advanced DEX",
     icon: "💱",
-  },
+  },  
   {
     title: "Cross-Chain Bridge",
     description: "Transfer assets across multiple blockchains effortlessly",
@@ -60,8 +60,8 @@ function ParticleField({ count = 2000, mouse }) {
     <Points ref={ref} positions={points} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#fff"
-        size={0.05}
+        color="black"
+        size={0.1}
         sizeAttenuation
         depthWrite={false}
       />
@@ -83,11 +83,11 @@ const ServiceCard = ({ service }) => (
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-white/5 p-8 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 border border-white/10"
+    className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-blue-100"
   >
     <div className="text-5xl mb-6">{service.icon}</div>
-    <h3 className="text-xl md:text-2xl font-semibold mb-4">{service.title}</h3>
-    <p className="text-gray-300 text-base md:text-lg">{service.description}</p>
+    <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#1e3a8a]">{service.title}</h3>
+    <p className="text-gray-600 text-base md:text-lg">{service.description}</p>
   </motion.div>
 )
 
@@ -187,20 +187,20 @@ export default function Component() {
         }}
       />
 
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+    <div className="min-h-screen bg-white text-[#1e3a8a] overflow-hidden">
       <div className="fixed inset-0 z-0">
         <Scene mouse={mouse} />
       </div>
 
-      <nav className="fixed w-full z-50 bg-black/50 backdrop-blur-md">
+      <nav className="fixed w-full z-50 bg-white border-b border-blue-100">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-2xl md:text-3xl font-bold">RN LABS</Link>
+          <Link href="/" className="text-2xl md:text-3xl font-bold text-[#1e3a8a]">RN LABS</Link>
           <div className="hidden sm:flex items-center gap-4 md:gap-8">
-            <Link href="#services" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Services</Link>
-            <Link href="#team" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Team</Link>
-            <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Contact</Link>
-            <Button size="lg" className="bg-white text-black hover:bg-gray-200">
-              <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg hover:text-gray-300 transition-colors">
+            <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
+            <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
+            <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
+            <Button size="lg" className="bg-[#1e3a8a] text-white hover:bg-blue-700">
+              <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg">
                 Demo
               </Link>
               <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
@@ -286,41 +286,37 @@ export default function Component() {
         </section>
       </main>
 
-      <footer className="bg-white/5 backdrop-blur-md py-16 relative z-10">
+      <footer className="bg-[#1e3a8a] text-white py-16 relative z-10">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
               <h3 className="text-2xl font-semibold mb-6">RN Labs</h3>
-              <p className="text-gray-400 text-lg">Pioneering the future of decentralized finance through innovative blockchain solutions.</p>
+              <p className="text-blue-100 text-lg">Pioneering the future of decentralized finance through innovative blockchain solutions.</p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold mb-6">Quick Links</h3>
               <ul className="space-y-4">
-                <li><Link href="#services" className="text-gray-400 hover:text-white text-lg">Services</Link></li>
-                <li><Link href="#team" className="text-gray-400 hover:text-white text-lg">Team</Link></li>
-                <li><Link target="_blank"
-                  rel="noopener noreferrer" href="https://t.me/mridulsingh9" className="text-gray-400 hover:text-white text-lg">Contact</Link></li>
+                <li><Link href="#services" className="text-blue-100 hover:text-white text-lg">Services</Link></li>
+                <li><Link href="#team" className="text-blue-100 hover:text-white text-lg">Team</Link></li>
+                <li><Link href="https://t.me/mridulsingh9" className="text-blue-100 hover:text-white text-lg">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="text-2xl font-semibold mb-6">Connect</h3>
               <div className="flex space-x-6">
-                <Link target="_blank"
-                rel="noopener noreferrer" href="https://x.com/RaumNetwork/" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="https://x.com/RaumNetwork/" className="text-blue-100 hover:text-white transition-colors">
                   <Twitter className="h-8 w-8" />
                 </Link>
-                <Link target="_blank"
-                rel="noopener noreferrer"href="https://github.com/Raum-Network" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="https://github.com/Raum-Network" className="text-blue-100 hover:text-white transition-colors">
                   <Github className="h-8 w-8" />
                 </Link>
-                <Link target="_blank"
-                rel="noopener noreferrer"href="https://www.linkedin.com/company/raum-network/about/?feedView=all" className="text-gray-400 hover:text-white transition-colors">
+                <Link href="https://www.linkedin.com/company/raum-network/about/" className="text-blue-100 hover:text-white transition-colors">
                   <Linkedin className="h-8 w-8" />
                 </Link>
               </div>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-400">
+          <div className="mt-12 pt-8 border-t border-blue-200/20 text-center text-blue-100">
             <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
           </div>
         </div>

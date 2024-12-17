@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { ArrowRight, ChevronDown, Github, Twitter, Linkedin } from "lucide-react"
+import { ArrowRight, ChevronDown, Github, Twitter, Linkedin } from 'lucide-react'
 import Link from "next/link"
 import { useRef, useEffect, useState, useMemo } from "react"
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
@@ -36,45 +36,108 @@ const services = [
 ]
 
 const team = [
-  { name: "Mridul Singh", role: "Visionary Founder & CEO", image: "/mridul.jpg", url: "https://www.linkedin.com/in/mridul-singh9/" },
-  { name: "Madhur Verma", role: "Chief Technology Officer", image: "/madhur.jpg", url: "https://www.linkedin.com/in/madhurrverma/" },
+  { name: "Mridul Singh", role: "Co-Founder and CEO", image: "/mridul.jpg", url: "https://www.linkedin.com/in/mridul-singh9/" },
+  { name: "Madhur Verma", role: "Co-Founder and CTO", image: "/madhur.jpg", url: "https://www.linkedin.com/in/madhurrverma/" },
 ]
 
-function ParticleField({ count = 2000, mouse }) {
-  const points = useMemo(() => {
-    const positions = new Array(count * 3).fill(0).map(() => (Math.random() - 0.5) * 20)
-    return new Float32Array(positions)
-  }, [count])
+function FloatingShapes({ mouse }) {
+  const group = useRef()
+  const { viewport } = useThree()
 
-  const ref = useRef()
-  const { size, viewport } = useThree()
-  const aspect = size.width / viewport.width
+  const shapes = useMemo(() => {
+    return new Array(15).fill().map((_, i) => ({
+      position: [
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 10,
+        (Math.random() - 0.5) * 10
+      ],
+      rotation: [
+        Math.random() * Math.PI,
+        Math.random() * Math.PI,
+        Math.random() * Math.PI
+      ],
+      scale: 0.5 + Math.random() * 0.5,
+      speed: 0.01 + Math.random() * 0.02,
+      direction: {
+        x: Math.random() > 0.5 ? 1 : -1,
+        y: Math.random() > 0.5 ? 1 : -1,
+        z: Math.random() > 0.5 ? 1 : -1
+      }
+    }))
+  }, [])
 
-  useFrame(() => {
-    if (ref.current) {
-      ref.current.rotation.x = mouse.current[1] / aspect / 1.5
-      ref.current.rotation.y = mouse.current[0] / aspect / 1.5
+  useFrame((state) => {
+    const time = state.clock.getElapsedTime()
+    const bounds = {
+      x: 8,
+      y: 5,
+      z: 8
     }
+    
+    shapes.forEach((shape, i) => {
+      if (group.current.children[i]) {
+        const mesh = group.current.children[i]
+        
+        mesh.position.x += 0.01 * shape.direction.x
+        mesh.position.y += 0.01 * shape.direction.y
+        mesh.position.z += 0.01 * shape.direction.z
+
+        if (Math.abs(mesh.position.x) > bounds.x) {
+          shape.direction.x *= -1
+        }
+        if (Math.abs(mesh.position.y) > bounds.y) {
+          shape.direction.y *= -1
+        }
+        if (Math.abs(mesh.position.z) > bounds.z) {
+          shape.direction.z *= -1
+        }
+
+        mesh.rotation.x += 0.005
+        mesh.rotation.y += 0.007
+        mesh.rotation.z += 0.003
+
+        group.current.rotation.x = mouse.current[1] * 0.2
+        group.current.rotation.y = mouse.current[0] * 0.2
+      }
+    })
   })
 
   return (
-    <Points ref={ref} positions={points} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#fff"
-        size={0.05}
-        sizeAttenuation
-        depthWrite={false}
-      />
-    </Points>
+    <group ref={group}>
+      {shapes.map((shape, i) => (
+        <mesh
+          key={i}
+          position={shape.position}
+          rotation={shape.rotation}
+          scale={shape.scale}
+        >
+          {i % 3 === 0 ? (
+            <octahedronGeometry args={[1]} />
+          ) : i % 3 === 1 ? (
+            <boxGeometry args={[1, 1, 1]} />
+          ) : (
+            <tetrahedronGeometry args={[1]} />
+          )}
+          <meshPhongMaterial
+            color={new THREE.Color().setHSL(Math.random(), 0.7, 0.3)}
+            wireframe
+            transparent
+            opacity={0.5}
+          />
+        </mesh>
+      ))}
+    </group>
   )
 }
 
 function Scene({ mouse }) {
   return (
     <Canvas camera={{ position: [0, 0, 15], fov: 75 }}>
-      <ParticleField mouse={mouse} />
-      <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+      <color attach="background" args={['#ffffff']} />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[10, 10, 10]} />
+      <FloatingShapes mouse={mouse} />
+      <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} />
     </Canvas>
   )
 }
@@ -88,7 +151,7 @@ const ServiceCard = ({ service }) => (
   >
     <div className="text-5xl mb-6">{service.icon}</div>
     <h3 className="text-xl md:text-2xl font-semibold mb-4">{service.title}</h3>
-    <p className="text-gray-300 text-base md:text-lg">{service.description}</p>
+    <p className="text-black text-base md:text-lg">{service.description}</p>
   </motion.div>
 )
 
@@ -101,10 +164,10 @@ const TeamMember = ({ member }) => (
   >
     <img src={member.image} alt={member.name} className="w-32 h-32 md:w-48 md:h-48 rounded-full mx-auto mb-6 object-cover" />
     <h3 className="text-xl md:text-2xl font-semibold mb-2">{member.name}</h3>
-    <p className="text-gray-400 text-base md:text-lg mb-4">{member.role}</p>
+    <p className="text-black text-base md:text-lg mb-4">{member.role}</p>
     <div className="flex justify-center space-x-4">
       <Link target="_blank"
-        rel="noopener noreferrer" href={member.url} className="text-gray-400 hover:text-white transition-colors">
+        rel="noopener noreferrer" href={member.url} className="text-black hover:text-black transition-colors">
         <Linkedin className="h-6 w-6" />
       </Link>
     </div>
@@ -188,20 +251,20 @@ export default function Component() {
         }}
       />
 
-    <div className="min-h-screen bg-black text-white overflow-hidden">
-      <div className="fixed inset-0 z-0">
+    <div className="min-h-screen bg-white text-black overflow-hidden">
+      <div className="fixed inset-0 z-0 opacity-20">    
         <Scene mouse={mouse} />
       </div>
 
-      <nav className="fixed w-full z-50 bg-black/50 backdrop-blur-md">
+      <nav className="fixed w-full z-50 bg-white border-b border-blue-100">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-2xl md:text-3xl font-bold">RN LABS</Link>
+          <Link href="/" className="text-2xl md:text-3xl font-bold text-[#1e3a8a]">RN LABS</Link>
           <div className="hidden sm:flex items-center gap-4 md:gap-8">
-            <Link href="#services" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Services</Link>
-            <Link href="#team" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Team</Link>
-            <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Contact</Link>
-            <Button size="lg" className="bg-white text-black hover:bg-gray-200">
-              <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg hover:text-gray-300 transition-colors">
+            <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
+            <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
+            <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
+            <Button size="lg" className="bg-[#1e3a8a] text-white hover:bg-blue-700" disabled>
+              <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg">
                 Demo
               </Link>
               <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
@@ -220,7 +283,7 @@ export default function Component() {
               <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight mb-4">
                 Unlock the Future of <AnimatedWords />
               </h1>
-              <p className="text-gray-400 text-lg md:text-2xl mb-8">
+              <p className="text-black text-lg md:text-2xl mb-8">
                 Building innovative solutions on the blockchain for a decentralized tomorrow
               </p>
               <Button size="lg" className="bg-white text-black hover:bg-gray-200">
@@ -231,14 +294,14 @@ export default function Component() {
               </Button>
             </motion.div>
           </div>
-          <div className="absolute bottom-8 w-full text-center text-gray-400 animate-bounce">
+          <div className="absolute bottom-8 w-full text-center text-black animate-bounce">
             <ChevronDown className="h-6 w-6 mx-auto" />
           </div>
         </section>
 
-        <section id="services" className="py-20 px-4 md:px-8">
+        <section id="services" className="py-20 px-4 md:px-8 relative z-10">
           <div className="container mx-auto max-w-5xl text-center">
-            <h2 className="text-3xl md:text-5xl font-semibold mb-12">Our Services</h2>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-12 text-[#1e3a8a]">Our Services</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {services.map((service, index) => (
                 <ServiceCard key={index} service={service} />
@@ -247,9 +310,9 @@ export default function Component() {
           </div>
         </section>
 
-        <section id="team" className="py-20 px-4 md:px-8">
+        <section id="team" className="py-20 px-4 md:px-8 relative z-10">
           <div className="container mx-auto max-w-5xl text-center">
-            <h2 className="text-3xl md:text-5xl font-semibold mb-12">Meet Our Team</h2>
+            <h2 className="text-3xl md:text-5xl font-semibold mb-12 text-[#1e3a8a]">Meet Our Team</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {team.map((member, index) => (
                 <TeamMember key={index} member={member} />
@@ -270,7 +333,7 @@ export default function Component() {
             >
               Join the Financial Revolution
             </motion.h2>
-            <p className="text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+            <p className="text-2xl text-black mb-12 max-w-3xl mx-auto">
               Be part of the next generation of decentralized finance. Connect with us to explore limitless possibilities.
             </p>
             <Button size="lg" className="text-lg px-8 py-4 bg-white text-black hover:bg-gray-200">
@@ -278,7 +341,7 @@ export default function Component() {
                 href="https://cal.com/mridulsingh/30min"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-lg hover:text-gray-300 transition-colors"
+                className="text-lg hover:text-black-300 transition-colors"
               >
                 Schedule A Consultation
               </Link>
@@ -292,36 +355,36 @@ export default function Component() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
               <h3 className="text-2xl font-semibold mb-6">RN Labs</h3>
-              <p className="text-gray-400 text-lg">Pioneering the future of decentralized finance through innovative blockchain solutions.</p>
+              <p className="text-black text-lg">Pioneering the future of decentralized finance through innovative blockchain solutions.</p>
             </div>
             <div>
               <h3 className="text-2xl font-semibold mb-6">Quick Links</h3>
               <ul className="space-y-4">
-                <li><Link href="#services" className="text-gray-400 hover:text-white text-lg">Services</Link></li>
-                <li><Link href="#team" className="text-gray-400 hover:text-white text-lg">Team</Link></li>
+                <li><Link href="#services" className="text-black hover:text-black-500 text-lg">Services</Link></li>
+                <li><Link href="#team" className="text-black hover:text-black-500 text-lg">Team</Link></li>
                 <li><Link target="_blank"
-                  rel="noopener noreferrer" href="https://t.me/mridulsingh9" className="text-gray-400 hover:text-white text-lg">Contact</Link></li>
+                  rel="noopener noreferrer" href="https://t.me/mridulsingh9" className="text-black hover:text-black-500 text-lg">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="text-2xl font-semibold mb-6">Connect</h3>
               <div className="flex space-x-6">
                 <Link target="_blank"
-                rel="noopener noreferrer" href="https://x.com/RaumNetwork/" className="text-gray-400 hover:text-white transition-colors">
+                rel="noopener noreferrer" href="https://x.com/RaumNetwork/" className="text-black hover:text-black transition-colors">
                   <Twitter className="h-8 w-8" />
                 </Link>
                 <Link target="_blank"
-                rel="noopener noreferrer"href="https://github.com/Raum-Network" className="text-gray-400 hover:text-white transition-colors">
+                rel="noopener noreferrer"href="https://github.com/Raum-Network" className="text-black hover:text-black transition-colors">
                   <Github className="h-8 w-8" />
                 </Link>
                 <Link target="_blank"
-                rel="noopener noreferrer"href="https://www.linkedin.com/company/raum-network/about/?feedView=all" className="text-gray-400 hover:text-white transition-colors">
+                rel="noopener noreferrer"href="https://www.linkedin.com/company/raum-network/about/?feedView=all" className="text-black hover:text-black transition-colors">
                   <Linkedin className="h-8 w-8" />
                 </Link>
               </div>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-white/10 text-center text-gray-400">
+          <div className="mt-12 pt-8 border-t border-white/10 text-center text-black">
             <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
           </div>
         </div>
@@ -330,3 +393,4 @@ export default function Component() {
     </>
   )
 }
+
