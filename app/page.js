@@ -147,11 +147,11 @@ const ServiceCard = ({ service }) => (
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-white/5 p-8 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 border border-white/10"
+    className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-[2px] border-black"
   >
     <div className="text-5xl mb-6">{service.icon}</div>
-    <h3 className="text-xl md:text-2xl font-semibold mb-4">{service.title}</h3>
-    <p className="text-black text-base md:text-lg">{service.description}</p>
+    <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#1e3a8a]">{service.title}</h3>
+    <p className="text-gray-600 text-base md:text-lg">{service.description}</p>
   </motion.div>
 )
 
@@ -160,14 +160,14 @@ const TeamMember = ({ member }) => (
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="text-center p-6 bg-white/5 rounded-lg backdrop-blur-sm hover:bg-white/10 transition-all duration-300 border border-white/10"
+    className="text-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-[2px] border-black"
   >
     <img src={member.image} alt={member.name} className="w-32 h-32 md:w-48 md:h-48 rounded-full mx-auto mb-6 object-cover" />
     <h3 className="text-xl md:text-2xl font-semibold mb-2">{member.name}</h3>
-    <p className="text-black text-base md:text-lg mb-4">{member.role}</p>
+    <p className="text-gray-600 text-base md:text-lg mb-4">{member.role}</p>
     <div className="flex justify-center space-x-4">
       <Link target="_blank"
-        rel="noopener noreferrer" href={member.url} className="text-black hover:text-black transition-colors">
+        rel="noopener noreferrer" href={member.url} className="text-black hover:text-gray-600 transition-colors">
         <Linkedin className="h-6 w-6" />
       </Link>
     </div>
@@ -200,6 +200,18 @@ const AnimatedWords = () => {
     </AnimatePresence>
   )
 }
+
+const FooterCard = ({ title, children }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border-[2px] border-black hover:bg-white/10 transition-all duration-300"
+  >
+    <h3 className="text-2xl font-semibold mb-6">{title}</h3>
+    {children}
+  </motion.div>
+)
 
 export default function Component() {
   const targetRef = useRef(null)
@@ -350,41 +362,62 @@ export default function Component() {
         </section>
       </main>
 
-      <footer className="bg-white/5 backdrop-blur-md py-16 relative z-10">
+      <footer className="bg-white/5 backdrop-blur-lg py-16 relative z-10 border-t-[2px] border-black">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">RN Labs</h3>
-              <p className="text-black text-lg">Pioneering the future of decentralized finance through innovative blockchain solutions.</p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Quick Links</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FooterCard title="RN Labs">
+              <p className="text-black text-lg">
+                Pioneering the future of decentralized finance through innovative blockchain solutions.
+              </p>
+            </FooterCard>
+
+            <FooterCard title="Quick Links">
               <ul className="space-y-4">
-                <li><Link href="#services" className="text-black hover:text-black-500 text-lg">Services</Link></li>
-                <li><Link href="#team" className="text-black hover:text-black-500 text-lg">Team</Link></li>
-                <li><Link target="_blank"
-                  rel="noopener noreferrer" href="https://t.me/mridulsingh9" className="text-black hover:text-black-500 text-lg">Contact</Link></li>
+                <li><Link href="#services" className="text-black hover:text-gray-600 text-lg">Services</Link></li>
+                <li><Link href="#team" className="text-black hover:text-gray-600 text-lg">Team</Link></li>
+                <li>
+                  <Link 
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    href="https://t.me/mridulsingh9" 
+                    className="text-black hover:text-gray-600 text-lg"
+                  >
+                    Contact
+                  </Link>
+                </li>
               </ul>
-            </div>
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Connect</h3>
+            </FooterCard>
+
+            <FooterCard title="Connect">
               <div className="flex space-x-6">
-                <Link target="_blank"
-                rel="noopener noreferrer" href="https://x.com/RaumNetwork/" className="text-black hover:text-black transition-colors">
+                <Link 
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  href="https://x.com/RaumNetwork/" 
+                  className="text-black hover:text-gray-600 transition-colors"
+                >
                   <Twitter className="h-8 w-8" />
                 </Link>
-                <Link target="_blank"
-                rel="noopener noreferrer"href="https://github.com/Raum-Network" className="text-black hover:text-black transition-colors">
+                <Link 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://github.com/Raum-Network" 
+                  className="text-black hover:text-gray-600 transition-colors"
+                >
                   <Github className="h-8 w-8" />
                 </Link>
-                <Link target="_blank"
-                rel="noopener noreferrer"href="https://www.linkedin.com/company/raum-network/about/?feedView=all" className="text-black hover:text-black transition-colors">
+                <Link 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://www.linkedin.com/company/raum-network/about/?feedView=all" 
+                  className="text-black hover:text-gray-600 transition-colors"
+                >
                   <Linkedin className="h-8 w-8" />
                 </Link>
               </div>
-            </div>
+            </FooterCard>
           </div>
-          <div className="mt-12 pt-8 border-t border-white/10 text-center text-black">
+          <div className="mt-12 pt-8 border-t border-black/10 text-center text-black">
             <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
           </div>
         </div>
