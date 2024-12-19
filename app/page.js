@@ -10,7 +10,8 @@ import * as THREE from 'three'
 import { Button } from "@/components/ui/button"
 import Script from 'next/script';
 import Head from 'next/head';
-import {NextSeo} from 'next-seo';
+import { NextSeo } from 'next-seo';
+
 
 const services = [
   {
@@ -73,11 +74,11 @@ function FloatingShapes({ mouse }) {
       y: 5,
       z: 8
     }
-    
+
     shapes.forEach((shape, i) => {
       if (group.current.children[i]) {
         const mesh = group.current.children[i]
-        
+
         mesh.position.x += 0.01 * shape.direction.x
         mesh.position.y += 0.01 * shape.direction.y
         mesh.position.z += 0.01 * shape.direction.z
@@ -147,7 +148,7 @@ const ServiceCard = ({ service }) => (
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-[2px] border-black"
+    className="bg-white/30 backdrop-blur-md p-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-[2px] border-white/20"
   >
     <div className="text-5xl mb-6">{service.icon}</div>
     <h3 className="text-xl md:text-2xl font-semibold mb-4 text-[#1e3a8a]">{service.title}</h3>
@@ -160,7 +161,7 @@ const TeamMember = ({ member }) => (
     initial={{ opacity: 0, y: 50 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="text-center p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-[2px] border-black"
+    className="text-center p-6 bg-white/30 backdrop-blur-md rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border-[2px] border-white/20"
   >
     <img src={member.image} alt={member.name} className="w-32 h-32 md:w-48 md:h-48 rounded-full mx-auto mb-6 object-cover" />
     <h3 className="text-xl md:text-2xl font-semibold mb-2">{member.name}</h3>
@@ -214,6 +215,8 @@ const FooterCard = ({ title, children }) => (
 )
 
 export default function Component() {
+  const [hoverText, setHoverText] = useState("Demo");
+
   const targetRef = useRef(null)
   const mouse = useRef([0, 0])
   const { scrollYProgress } = useScroll({
@@ -239,14 +242,15 @@ export default function Component() {
 
   return (
     <>
-    <Head>
-      <title>RN Labs</title>
-    </Head>
-    <NextSeo
+      <NextSeo
         title="RN Labs"
         description="RN Labs Services"
+        openGraph={{
+          title: 'RN Labs',
+          description: 'RN Labs Services',
+        }}
       />
-    <Script
+      <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=G-FGF1WB7LKB`}
       />
@@ -263,166 +267,172 @@ export default function Component() {
         }}
       />
 
-    <div className="min-h-screen bg-white text-black overflow-hidden">
-      <div className="fixed inset-0 z-0 opacity-20">    
-        <Scene mouse={mouse} />
-      </div>
-
-      <nav className="fixed w-full z-50 bg-white border-b border-blue-100">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-2xl md:text-3xl font-bold text-[#1e3a8a]">RN LABS</Link>
-          <div className="hidden sm:flex items-center gap-4 md:gap-8">
-            <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
-            <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
-            <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
-            <Button size="lg" className="bg-[#1e3a8a] text-white hover:bg-blue-700" disabled>
-              <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg">
-                Demo
-              </Link>
-              <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-            </Button>
-          </div>
+      <div className="min-h-screen bg-white text-black overflow-hidden">
+        <div className="fixed inset-0 z-0 opacity-20">
+          <Scene mouse={mouse} />
         </div>
-      </nav>
 
-      <main>
-        <section ref={targetRef} className="h-screen relative overflow-hidden">
-          <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-            <motion.div
-              style={{ opacity, scale, y }}
-              className="max-w-4xl mx-auto"
-            >
-              <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight mb-4">
-                Unlock the Future of <AnimatedWords />
-              </h1>
-              <p className="text-black text-lg md:text-2xl mb-8">
-                Building innovative solutions on the blockchain for a decentralized tomorrow
+        <nav className="fixed w-full z-50 bg-white border-b border-blue-100">
+          <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+            <Link href="/" className="text-2xl md:text-3xl font-bold text-[#1e3a8a]">RN LABS</Link>
+            <div className="hidden sm:flex items-center gap-4 md:gap-8">
+              <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
+              <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
+              <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
+              <Button
+                size="lg"
+                className="bg-gray-300 text-gray-600 hover:bg-gray-300 border-[2px] border-gray-400 opacity-50 cursor-not-allowed shadow-[0_0_0_2px_gray-400] disabled:border-gray-400 disabled:shadow-[0_0_0_2px_gray-400] group border"
+                disabled
+              >
+                <span className="relative">
+                  <span className="text-sm md:text-lg group-hover:hidden">Demo</span>
+                  <span className="text-sm md:text-lg hidden group-hover:inline">Currently Disabled</span>
+                </span>
+                <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
+              </Button>
+
+            </div>
+          </div>
+        </nav>
+
+        <main>
+          <section ref={targetRef} className="h-screen relative overflow-hidden">
+            <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+              <motion.div
+                style={{ opacity, scale, y }}
+                className="max-w-4xl mx-auto"
+              >
+                <h1 className="text-5xl sm:text-6xl md:text-8xl font-extrabold tracking-tight mb-4">
+                  Unlock the Future of <AnimatedWords />
+                </h1>
+                <p className="text-black text-lg md:text-2xl mb-8">
+                  Building innovative solutions on the blockchain for a decentralized tomorrow
+                </p>
+                <Button size="lg" className="bg-white text-black hover:bg-gray-200 border">
+                  <Link href="https://dex.raum.network" target="_blank" rel="noopener noreferrer" className="flex items-center">
+                    Explore Our Ecosystem
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
+            <div className="absolute bottom-8 w-full text-center text-black animate-bounce">
+              <ChevronDown className="h-6 w-6 mx-auto" />
+            </div>
+          </section>
+
+          <section id="services" className="py-20 px-4 md:px-8 relative z-10">
+            <div className="container mx-auto max-w-5xl text-center bg-white/5 backdrop-blur-sm p-6 rounded-lg border-[2px] border-black hover:bg-white/10 transition-all duration-300">
+              <h2 className="text-3xl md:text-5xl font-semibold mb-12 text-[#1e3a8a]">Our Services</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {services.map((service, index) => (
+                  <ServiceCard key={index} service={service} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+          <section id="team" className="py-20 px-4 md:px-8 relative z-10">
+            <div className="container mx-auto max-w-5xl text-center bg-white/5 backdrop-blur-sm p-6 rounded-lg border-[2px] border-black hover:bg-white/10 transition-all duration-300">
+              <h2 className="text-3xl md:text-5xl font-semibold mb-12 text-[#1e3a8a]">Meet Our Team</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {team.map((member, index) => (
+                  <TeamMember key={index} member={member} />
+                ))}
+              </div>
+            </div>
+          </section>
+
+
+
+          <section id="contact" className="py-20 relative z-10">
+            <div className="container mx-auto px-6 text-center">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-4xl md:text-5xl font-bold mb-8"
+              >
+                Join the Financial Revolution
+              </motion.h2>
+              <p className="text-2xl text-black mb-12 max-w-3xl mx-auto">
+                Be part of the next generation of decentralized finance. Connect with us to explore limitless possibilities.
               </p>
-              <Button size="lg" className="bg-white text-black hover:bg-gray-200">
-                <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="flex items-center">
-                  Explore Our Ecosystem
-                  <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="text-lg px-8 py-4 bg-white text-black hover:bg-gray-200">
+                <Link
+                  href="https://cal.com/mridulsingh/30min"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg hover:text-black-300 transition-colors"
+                >
+                  Schedule A Consultation
                 </Link>
               </Button>
-            </motion.div>
-          </div>
-          <div className="absolute bottom-8 w-full text-center text-black animate-bounce">
-            <ChevronDown className="h-6 w-6 mx-auto" />
-          </div>
-        </section>
-
-        <section id="services" className="py-20 px-4 md:px-8 relative z-10">
-          <div className="container mx-auto max-w-5xl text-center">
-            <h2 className="text-3xl md:text-5xl font-semibold mb-12 text-[#1e3a8a]">Our Services</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {services.map((service, index) => (
-                <ServiceCard key={index} service={service} />
-              ))}
             </div>
-          </div>
-        </section>
+          </section>
+        </main>
 
-        <section id="team" className="py-20 px-4 md:px-8 relative z-10">
-          <div className="container mx-auto max-w-5xl text-center">
-            <h2 className="text-3xl md:text-5xl font-semibold mb-12 text-[#1e3a8a]">Meet Our Team</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {team.map((member, index) => (
-                <TeamMember key={index} member={member} />
-              ))}
-            </div>
-          </div>
-        </section>
+        <footer className="bg-white/5 backdrop-blur-lg py-16 relative z-10 border-t-[2px] border-black">
+          <div className="container mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <FooterCard title="RN Labs">
+                <p className="text-black text-lg">
+                  Pioneering the future of decentralized finance through innovative blockchain solutions.
+                </p>
+              </FooterCard>
 
+              <FooterCard title="Quick Links">
+                <ul className="space-y-4">
+                  <li><Link href="#services" className="text-black hover:text-gray-600 text-lg">Services</Link></li>
+                  <li><Link href="#team" className="text-black hover:text-gray-600 text-lg">Team</Link></li>
+                  <li>
+                    <Link
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="https://t.me/mridulsingh9"
+                      className="text-black hover:text-gray-600 text-lg"
+                    >
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </FooterCard>
 
-
-        <section id="contact" className="py-20 relative z-10">
-          <div className="container mx-auto px-6 text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="text-4xl md:text-5xl font-bold mb-8"
-            >
-              Join the Financial Revolution
-            </motion.h2>
-            <p className="text-2xl text-black mb-12 max-w-3xl mx-auto">
-              Be part of the next generation of decentralized finance. Connect with us to explore limitless possibilities.
-            </p>
-            <Button size="lg" className="text-lg px-8 py-4 bg-white text-black hover:bg-gray-200">
-              <Link
-                href="https://cal.com/mridulsingh/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg hover:text-black-300 transition-colors"
-              >
-                Schedule A Consultation
-              </Link>
-            </Button>
-          </div>
-        </section>
-      </main>
-
-      <footer className="bg-white/5 backdrop-blur-lg py-16 relative z-10 border-t-[2px] border-black">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FooterCard title="RN Labs">
-              <p className="text-black text-lg">
-                Pioneering the future of decentralized finance through innovative blockchain solutions.
-              </p>
-            </FooterCard>
-
-            <FooterCard title="Quick Links">
-              <ul className="space-y-4">
-                <li><Link href="#services" className="text-black hover:text-gray-600 text-lg">Services</Link></li>
-                <li><Link href="#team" className="text-black hover:text-gray-600 text-lg">Team</Link></li>
-                <li>
-                  <Link 
+              <FooterCard title="Connect">
+                <div className="flex space-x-6">
+                  <Link
                     target="_blank"
-                    rel="noopener noreferrer" 
-                    href="https://t.me/mridulsingh9" 
-                    className="text-black hover:text-gray-600 text-lg"
+                    rel="noopener noreferrer"
+                    href="https://x.com/RaumNetwork/"
+                    className="text-black hover:text-gray-600 transition-colors"
                   >
-                    Contact
+                    <Twitter className="h-8 w-8" />
                   </Link>
-                </li>
-              </ul>
-            </FooterCard>
-
-            <FooterCard title="Connect">
-              <div className="flex space-x-6">
-                <Link 
-                  target="_blank"
-                  rel="noopener noreferrer" 
-                  href="https://x.com/RaumNetwork/" 
-                  className="text-black hover:text-gray-600 transition-colors"
-                >
-                  <Twitter className="h-8 w-8" />
-                </Link>
-                <Link 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://github.com/Raum-Network" 
-                  className="text-black hover:text-gray-600 transition-colors"
-                >
-                  <Github className="h-8 w-8" />
-                </Link>
-                <Link 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://www.linkedin.com/company/raum-network/about/?feedView=all" 
-                  className="text-black hover:text-gray-600 transition-colors"
-                >
-                  <Linkedin className="h-8 w-8" />
-                </Link>
-              </div>
-            </FooterCard>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://github.com/Raum-Network"
+                    className="text-black hover:text-gray-600 transition-colors"
+                  >
+                    <Github className="h-8 w-8" />
+                  </Link>
+                  <Link
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href="https://www.linkedin.com/company/raum-network/about/?feedView=all"
+                    className="text-black hover:text-gray-600 transition-colors"
+                  >
+                    <Linkedin className="h-8 w-8" />
+                  </Link>
+                </div>
+              </FooterCard>
+            </div>
+            <div className="mt-12 pt-8 border-t border-black/10 text-center text-black">
+              <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
+            </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-black/10 text-center text-black">
-            <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
     </>
   )
 }
