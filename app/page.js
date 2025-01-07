@@ -26,7 +26,7 @@ const MobileNav = () => {
   const [open, setOpen] = useState(false)
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={setOpen} className="bg-white">
       <DrawerTrigger asChild>
         <Button variant="ghost" size="icon" className="sm:hidden">
           <Menu className="h-6 w-6 text-[#1e3a8a]" />
