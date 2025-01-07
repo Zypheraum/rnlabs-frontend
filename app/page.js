@@ -347,9 +347,9 @@ export default function Component() {
               <img src="https://raw.githubusercontent.com/Zypheraum/rnlabs-frontend/refs/heads/main/public/rnlabs.svg" height={"300"} width={"220"} />
             </Link>
             <div className="hidden sm:flex items-center gap-4 md:gap-8">
-              <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
-              <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
-              <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
+              <Link href="#services" className="text-sm md:text-lg text-black hover:text-blue-600 transition-colors">Services</Link>
+              <Link href="#team" className="text-sm md:text-lg text-black hover:text-blue-600 transition-colors">Team</Link>
+              <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-black hover:text-blue-600 transition-colors">Contact</Link>
               {/* <Button
                 size="lg"
                 className="bg-gray-300 text-gray-600 hover:bg-gray-300 border-[2px] border-gray-400 opacity-50 cursor-not-allowed shadow-[0_0_0_2px_gray-400] disabled:border-gray-400 disabled:shadow-[0_0_0_2px_gray-400] group border"
@@ -454,14 +454,14 @@ export default function Component() {
 
               <FooterCard title="Quick Links">
                 <ul className="space-y-4 text-center">
-                  <li><Link href="#services" className="text-black hover:text-gray-600 text-lg">Services</Link></li>
-                  <li><Link href="#team" className="text-black hover:text-gray-600 text-lg">Team</Link></li>
+                  <li><Link href="#services" className="text-black hover:text-gray-600 hover:text-blue-600 text-lg">Services</Link></li>
+                  <li><Link href="#team" className="text-black hover:text-gray-600 text-lg hover:text-blue-600">Team</Link></li>
                   <li>
                     <Link
                       target="_blank"
                       rel="noopener noreferrer"
                       href="https://t.me/mridulsingh9"
-                      className="text-black hover:text-gray-600 text-lg"
+                      className="text-black hover:text-gray-600 text-lg hover:text-blue-600"
                     >
                       Contact
                     </Link>
@@ -475,7 +475,7 @@ export default function Component() {
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://x.com/RaumNetwork/"
-                    className="text-black hover:text-gray-600 transition-colors"
+                    className="text-black hover:text-gray-600 transition-colors hover:text-blue-600"
                   >
                     <Twitter className="h-8 w-8" />
                   </Link>
@@ -483,7 +483,7 @@ export default function Component() {
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://github.com/Raum-Network"
-                    className="text-black hover:text-gray-600 transition-colors"
+                    className="text-black hover:text-gray-600 transition-colors hover:text-blue-600"
                   >
                     <Github className="h-8 w-8" />
                   </Link>
@@ -491,7 +491,7 @@ export default function Component() {
                     target="_blank"
                     rel="noopener noreferrer"
                     href="https://www.linkedin.com/company/raum-network/about/?feedView=all"
-                    className="text-black hover:text-gray-600 transition-colors"
+                    className="text-black hover:text-gray-600 transition-colors hover:text-blue-600"
                   >
                     <Linkedin className="h-8 w-8" />
                   </Link>
