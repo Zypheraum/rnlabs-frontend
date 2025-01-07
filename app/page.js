@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
-import { ArrowRight, ChevronDown, Github, Twitter, Linkedin } from 'lucide-react'
+import { ArrowRight, ChevronDown, Github, Twitter, Linkedin , Menu } from 'lucide-react'
 import Link from "next/link"
 import { useRef, useEffect, useState, useMemo } from "react"
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
@@ -11,8 +11,77 @@ import { Button } from "@/components/ui/button"
 import Script from 'next/script';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 
+const MobileNav = () => {
+  const [open, setOpen] = useState(false)
 
+  return (
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
+        <Button variant="ghost" size="icon" className="sm:hidden">
+          <Menu className="h-6 w-6 text-[#1e3a8a]" />
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent className="bg-white">
+        <div className="mx-auto w-full max-w-sm">
+          <DrawerHeader>
+            <DrawerTitle className="text-center text-2xl font-bold text-[#1e3a8a]">
+              Menu
+            </DrawerTitle>
+          </DrawerHeader>
+          <div className="p-4 pb-8">
+            <div className="flex flex-col space-y-4">
+              <Link
+                href="#services"
+                onClick={() => setOpen(false)}
+                className="text-lg text-center py-2 text-[#1e3a8a] hover:text-blue-600 transition-all duration-300"
+              >
+                Services
+              </Link>
+              <Link
+                href="#team"
+                onClick={() => setOpen(false)}
+                className="text-lg text-center py-2 text-[#1e3a8a] hover:text-blue-600 transition-all duration-300"
+              >
+                Team
+              </Link>
+              <Link
+                href="https://t.me/mridulsingh9"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="text-lg text-center py-2 text-[#1e3a8a] hover:text-blue-600 transition-all duration-300"
+              >
+                Contact
+              </Link>
+              {/* <Button
+                size="lg"
+                className="bg-gray-300 text-gray-600 hover:bg-gray-300 border-[2px] border-gray-400 opacity-50 cursor-not-allowed shadow-[0_0_0_2px_gray-400] disabled:border-gray-400 disabled:shadow-[0_0_0_2px_gray-400] group border w-full"
+                disabled
+              >
+                <span className="relative">
+                  <span className="text-lg group-hover:hidden">Demo</span>
+                  <span className="text-lg hidden group-hover:inline">Currently Disabled</span>
+                </span>
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button> */}
+            </div>
+          </div>
+        </div>
+      </DrawerContent>
+    </Drawer>
+  )
+}
 const services = [
   {
     title: "Decentralized Exchange",
@@ -207,9 +276,9 @@ const FooterCard = ({ title, children }) => (
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border-[2px] border-black hover:bg-white/10 transition-all duration-300"
+    className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border-[2px] border-black hover:bg-white/10 transition-all duration-300 mx-auto"
   >
-    <h3 className="text-2xl font-semibold mb-6">{title}</h3>
+    <h3 className="text-2xl font-semibold mb-6 text-center">{title}</h3>
     {children}
   </motion.div>
 )
@@ -274,12 +343,14 @@ export default function Component() {
 
         <nav className="fixed w-full z-50 bg-white border-b border-blue-100">
           <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-            <Link href="/" className="text-2xl md:text-3xl font-bold text-[#1e3a8a]">RN LABS</Link>
+            <Link href="#" rel="noopener noreferrer">
+              <img src="https://raw.githubusercontent.com/Zypheraum/rnlabs-frontend/refs/heads/main/public/rnlabs.svg" height={"300"} width={"220"} />
+            </Link>
             <div className="hidden sm:flex items-center gap-4 md:gap-8">
               <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
               <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
               <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
-              <Button
+              {/* <Button
                 size="lg"
                 className="bg-gray-300 text-gray-600 hover:bg-gray-300 border-[2px] border-gray-400 opacity-50 cursor-not-allowed shadow-[0_0_0_2px_gray-400] disabled:border-gray-400 disabled:shadow-[0_0_0_2px_gray-400] group border"
                 disabled
@@ -289,9 +360,9 @@ export default function Component() {
                   <span className="text-sm md:text-lg hidden group-hover:inline">Currently Disabled</span>
                 </span>
                 <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-              </Button>
-
+              </Button> */}
             </div>
+            <MobileNav />
           </div>
         </nav>
 
@@ -358,7 +429,7 @@ export default function Component() {
               <p className="text-2xl text-black mb-12 max-w-3xl mx-auto">
                 Be part of the next generation of decentralized finance. Connect with us to explore limitless possibilities.
               </p>
-              <Button size="lg" className="text-lg px-8 py-4 bg-white text-black hover:bg-gray-200">
+              <Button size="lg" className="bg-white text-black hover:bg-gray-200 border">
                 <Link
                   href="https://cal.com/mridulsingh/30min"
                   target="_blank"
@@ -374,15 +445,15 @@ export default function Component() {
 
         <footer className="bg-white/5 backdrop-blur-lg py-16 relative z-10 border-t-[2px] border-black">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3">
               <FooterCard title="RN Labs">
-                <p className="text-black text-lg">
+                <p className="text-black text-lg text-center">
                   Pioneering the future of decentralized finance through innovative blockchain solutions.
                 </p>
               </FooterCard>
 
               <FooterCard title="Quick Links">
-                <ul className="space-y-4">
+                <ul className="space-y-4 text-center">
                   <li><Link href="#services" className="text-black hover:text-gray-600 text-lg">Services</Link></li>
                   <li><Link href="#team" className="text-black hover:text-gray-600 text-lg">Team</Link></li>
                   <li>
@@ -399,7 +470,7 @@ export default function Component() {
               </FooterCard>
 
               <FooterCard title="Connect">
-                <div className="flex space-x-6">
+                <div className="flex space-x-6 justify-center">
                   <Link
                     target="_blank"
                     rel="noopener noreferrer"
@@ -428,7 +499,7 @@ export default function Component() {
               </FooterCard>
             </div>
             <div className="mt-12 pt-8 border-t border-black/10 text-center text-black">
-              <p>&copy; 2024 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
+              <p>&copy; 2021-2025 Raum Network. Revolutionizing DeFi. All rights reserved.</p>
             </div>
           </div>
         </footer>

@@ -10,6 +10,7 @@ import * as THREE from 'three'
 import { Button } from "@/components/ui/button"
 import Script from 'next/script';
 import Head from 'next/head';
+import { NextSeo } from "next-seo"
 
 const services = [
   {
@@ -193,21 +194,18 @@ export default function Component() {
       </div>
 
       <nav className="fixed w-full z-50 bg-white border-b border-blue-100">
-        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
-          <Link href="/" className="text-2xl md:text-3xl font-bold text-[#1e3a8a]">RN LABS</Link>
-          <div className="hidden sm:flex items-center gap-4 md:gap-8">
-            <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
-            <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
-            <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
-            <Button size="lg" className="bg-[#1e3a8a] text-white hover:bg-blue-700">
-              <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg">
-                Demo
-              </Link>
-              <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
-            </Button>
+          <div className="container mx-auto px-6 h-20 flex items-center justify-between">
+            <Link href="#" rel="noopener noreferrer">
+              <img src="https://raw.githubusercontent.com/Zypheraum/rnlabs-frontend/refs/heads/main/public/rnlabs.svg" height={"300"} width={"220"} />
+            </Link>
+            <div className="hidden sm:flex items-center gap-4 md:gap-8">
+              <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
+              <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
+              <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
+            </div>
+            <MobileNav />
           </div>
-        </div>
-      </nav>
+        </nav>
 
       <main>
         <section ref={targetRef} className="h-screen relative overflow-hidden">
