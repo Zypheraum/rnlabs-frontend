@@ -198,7 +198,7 @@ export default function Component() {
           <div className="hidden sm:flex items-center gap-4 md:gap-8">
             <Link href="#services" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Services</Link>
             <Link href="#team" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Team</Link>
-            <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Contact</Link>
+            <Link href="mailto:comms@raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg hover:text-gray-300 transition-colors">Contact</Link>
             <Button size="lg" className="bg-white text-black hover:bg-gray-200">
               <Link href="https://lst-stag.raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg hover:text-gray-300 transition-colors">
                 Demo

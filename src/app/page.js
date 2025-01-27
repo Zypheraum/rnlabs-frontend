@@ -201,7 +201,7 @@ export default function Component() {
             <div className="hidden sm:flex items-center gap-4 md:gap-8">
               <Link href="#services" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Services</Link>
               <Link href="#team" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Team</Link>
-              <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
+              <Link href="mailto:comms@raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-[#1e3a8a] hover:text-blue-600 transition-colors">Contact</Link>
             </div>
             <MobileNav />
           </div>
@@ -296,7 +296,7 @@ export default function Component() {
               <ul className="space-y-4">
                 <li><Link href="#services" className="text-blue-100 hover:text-white text-lg">Services</Link></li>
                 <li><Link href="#team" className="text-blue-100 hover:text-white text-lg">Team</Link></li>
-                <li><Link href="https://t.me/mridulsingh9" className="text-blue-100 hover:text-white text-lg">Contact</Link></li>
+                <li><Link href="mailto:comms@raum.network" className="text-blue-100 hover:text-white text-lg">Contact</Link></li>
               </ul>
             </div>
             <div>

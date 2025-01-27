@@ -56,7 +56,7 @@ const MobileNav = () => {
                 Team
               </Link>
               <Link
-                href="https://t.me/mridulsingh9"
+                href="mailto:comms@raum.network"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
@@ -349,7 +349,7 @@ export default function Component() {
             <div className="hidden sm:flex items-center gap-4 md:gap-8">
               <Link href="#services" className="text-sm md:text-lg text-black hover:text-blue-600 transition-colors">Services</Link>
               <Link href="#team" className="text-sm md:text-lg text-black hover:text-blue-600 transition-colors">Team</Link>
-              <Link href="https://t.me/mridulsingh9" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-black hover:text-blue-600 transition-colors">Contact</Link>
+              <Link href="mailto:comms@raum.network" target="_blank" rel="noopener noreferrer" className="text-sm md:text-lg text-black hover:text-blue-600 transition-colors">Contact</Link>
               {/* <Button
                 size="lg"
                 className="bg-gray-300 text-gray-600 hover:bg-gray-300 border-[2px] border-gray-400 opacity-50 cursor-not-allowed shadow-[0_0_0_2px_gray-400] disabled:border-gray-400 disabled:shadow-[0_0_0_2px_gray-400] group border"
@@ -460,7 +460,7 @@ export default function Component() {
                     <Link
                       target="_blank"
                       rel="noopener noreferrer"
-                      href="https://t.me/mridulsingh9"
+                      href="mailto:comms@raum.network"
                       className="text-black hover:text-gray-600 text-lg hover:text-blue-600"
                     >
                       Contact
@@ -490,7 +490,7 @@ export default function Component() {
                   <Link
                     target="_blank"
                     rel="noopener noreferrer"
-                    href="https://www.linkedin.com/company/raum-network/about/?feedView=all"
+                    href="https://www.linkedin.com/company/raum-network/"
                     className="text-black hover:text-gray-600 transition-colors hover:text-blue-600"
                   >
                     <Linkedin className="h-8 w-8" />

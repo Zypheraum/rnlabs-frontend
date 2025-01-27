@@ -12,7 +12,7 @@ export function MobileNav() {
   const navItems = [
     { href: "#services", label: "Services" },
     { href: "#team", label: "Team" },
-    { href: "https://t.me/mridulsingh9", label: "Contact", external: true },
+    { href: "mailto:comms@raum.network", label: "Contact", external: true },
   ]
 
   return (
